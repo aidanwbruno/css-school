@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glass bonito de verdade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-1: #07111f;
+      --bg-2: #0f172a;
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.74);
+      --line: rgba(255, 255, 255, 0.10);
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.08);
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.42), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(6, 182, 212, 0.32), transparent 28%),
+        radial-gradient(circle at 50% 80%, rgba(236, 72, 153, 0.22), transparent 30%),
+        linear-gradient(135deg, #07111f, #0f172a 60%, #111827);
+      padding: 32px;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e6eef8;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(10px);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 700px;
+      margin-bottom: 14px;
+    }
+
+    .lead {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .preview-wrap {
+      position: relative;
+      padding: 20px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .preview-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.22), transparent 20%),
+        radial-gradient(circle at 85% 25%, rgba(6, 182, 212, 0.18), transparent 18%),
+        radial-gradient(circle at 50% 85%, rgba(236, 72, 153, 0.16), transparent 22%);
+      pointer-events: none;
+    }
+
+    .glass-card {
+      width: min(560px, 100%);
+      padding: 36px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow:
+        0 20px 80px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+          rgba(255, 255, 255, 0.18),
+          rgba(255, 255, 255, 0.04));
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5eef8;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .glass-card h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      color: #ffffff;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .glass-card p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 34ch;
+      position: relative;
+      z-index: 1;
+    }
+
+    .glow {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      filter: blur(50px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .glow-1 {
+      top: -60px;
+      right: -40px;
+      background: #7c3aed;
+    }
+
+    .glow-2 {
+      bottom: -80px;
+      left: -40px;
+      background: #06b6d4;
+    }
+
+    .code-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .code-card {
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .code-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .code-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #eef4fb;
+      letter-spacing: 0.02em;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    pre {
+      margin: 0;
+      padding: 18px;
+      overflow: auto;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #dce7f3;
+      background: rgba(0, 0, 0, 0.20);
+      white-space: pre-wrap;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-wrap {
+        min-height: 420px;
+      }
+
+      body {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="eyebrow">CSS pequeno, diferença grande</div>
+    <h1>Glass bonito de verdade</h1>
+    <p class="lead">
+      Transparência com blur deixa o bloco com um ar mais premium, mais atual
+      e muito mais interessante visualmente.
+    </p>
+
+    <section class="layout">
+      <div class="preview-wrap">
+        <div class="glass-card">
+          <div class="glow glow-1"></div>
+          <div class="glow glow-2"></div>
+
+          <div class="badge">Meu preferido no CSS</div>
+          <h2>Glass bonito de verdade</h2>
+          <p>
+            Transparência com blur deixa o bloco com um ar mais premium,
+            mais atual e muito mais interessante visualmente.
+          </p>
+        </div>
+      </div>
+
+      <div class="code-stack">
+        <div class="code-card">
+          <div class="code-head">
+            <div class="code-title">HTML</div>
+            <div class="dots">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </div>
+          <pre>&lt;div class="glass-card"&gt;
+  &lt;div class="glow glow-1"&gt;&lt;/div&gt;
+  &lt;div class="glow glow-2"&gt;&lt;/div&gt;
+
+  &lt;div class="badge"&gt;Meu preferido no CSS&lt;/div&gt;
+  &lt;h2&gt;Glass bonito de verdade&lt;/h2&gt;
+  &lt;p&gt;
+    Transparência com blur deixa o bloco
+    com um ar mais premium.
+  &lt;/p&gt;
+&lt;/div&gt;</pre>
+        </div>
+
+        <div class="code-card">
+          <div class="code-head">
+            <div class="code-title">CSS</div>
+            <div class="dots">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </div>
+          <pre>.glass-card {
+  padding: 36px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 20px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}</pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+
+</html>
